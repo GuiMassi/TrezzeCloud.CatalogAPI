@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TrezzeCloud.Catalog.Api/TrezzeCloud.Catalog.Api.csproj" />
+    <Project Path="src/TrezzeCloud.Catalog.Application/TrezzeCloud.Catalog.Application.csproj" />
+    <Project Path="src/TrezzeCloud.Catalog.Domain/TrezzeCloud.Catalog.Domain.csproj" />
+    <Project Path="src/TrezzeCloud.Catalog.Infrastructure/TrezzeCloud.Catalog.Infrastructure.csproj" />
+    <Project Path="src/TrezzeCloud.Contracts/TrezzeCloud.Contracts.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TrezzeCloud.Catalog.Tests/TrezzeCloud.Catalog.Tests.csproj" />
+  </Folder>
+</Solution>
