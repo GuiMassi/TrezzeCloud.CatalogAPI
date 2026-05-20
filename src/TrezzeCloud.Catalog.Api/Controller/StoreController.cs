@@ -61,4 +61,36 @@ public sealed class StoreController : ControllerBase
             Message = "Purchase processing started."
         });
     }
+
+    [Authorize]
+    [HttpGet("my-library")]
+    public async Task<IActionResult> MyLibrary()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+        if (userIdClaim is null)
+            return Unauthorized();
+
+        var userId = Guid.Parse(userIdClaim.Value);
+
+        var games = await _context.UserLibraries
+            .Where(x => x.UserId == userId)
+            .Join(
+                _context.Games,
+                library => library.GameId,
+                game => game.Id,
+                (library, game) => new
+                {
+                    game.Id,
+                    game.Title,
+                    game.Description,
+                    game.Price,
+                    game.Category,
+                    game.ImageUrl,
+                    library.PurchasedAt
+                })
+            .ToListAsync();
+
+        return Ok(games);
+    }
 }
