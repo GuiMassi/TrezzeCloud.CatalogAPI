@@ -78,4 +78,6 @@ app.MapControllers();
 
 app.MapScalarApiReference();
 
+await DependencyInjection.MigrateDatabaseAsync(app.Services);
+
 app.Run();

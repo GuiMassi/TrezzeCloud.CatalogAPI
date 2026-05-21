@@ -14,9 +14,34 @@ public static class DependencyInjection
         services.AddDbContext<CatalogDbContext>(options =>
         {
             options.UseSqlServer(
-                configuration.GetConnectionString("CatalogDatabase"));
+                configuration.GetConnectionString("CatalogDatabase"),
+                sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(10, TimeSpan.FromSeconds(5), null);
+                });
         });
 
         return services;
+    }
+
+    public static async Task MigrateDatabaseAsync(IServiceProvider serviceProvider)
+    {
+        using var scope = serviceProvider.CreateScope();
+
+        var dbContext = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
+
+        const int maxAttempts = 10;
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            try
+            {
+                await dbContext.Database.MigrateAsync();
+                break;
+            }
+            catch when (attempt < maxAttempts)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(3));
+            }
+        }
     }
 }
