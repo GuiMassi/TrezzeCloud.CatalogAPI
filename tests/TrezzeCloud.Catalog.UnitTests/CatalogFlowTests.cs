@@ -1,8 +1,10 @@
 using FluentAssertions;
 using MassTransit;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Security.Claims;
 using TrezzeCloud.Catalog.Api.Consumers;
 using TrezzeCloud.Catalog.Api.Controllers;
 using TrezzeCloud.Catalog.Application.DTOs;
@@ -25,7 +27,8 @@ public sealed class CatalogFlowTests
             "Arcade racing game",
             99.90m,
             "Racing",
-            "https://img/game.png");
+            "https://img/game.png",
+            DateTime.UtcNow.AddDays(-1));
 
         var result = await sut.Create(request);
 
@@ -36,6 +39,49 @@ public sealed class CatalogFlowTests
         var game = await context.Games.SingleAsync();
         game.Title.Should().Be("Cyber Drift");
         game.Price.Should().Be(99.90m);
+        game.IsAvailable().Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task Should_Not_Start_Purchase_When_Game_Is_Not_Available()
+    {
+        await using var context = CreateDbContext();
+
+        var publishEndpointMock = new Mock<IPublishEndpoint>();
+        var sut = new StoreController(context, publishEndpointMock.Object)
+        {
+            ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext
+                {
+                    User = new ClaimsPrincipal(new ClaimsIdentity(
+                    [
+                        new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+                    ],
+                    "TestAuth"))
+                }
+            }
+        };
+
+        var unavailableGame = new Game(
+            "Future Game",
+            "Not available yet",
+            59.90m,
+            "Action",
+            "https://img/future-game.png",
+            DateTime.UtcNow.AddDays(3));
+
+        await context.Games.AddAsync(unavailableGame);
+        await context.SaveChangesAsync();
+
+        var result = await sut.Purchase(unavailableGame.Id);
+
+        var badRequestResult = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+        badRequestResult.Value.Should().Be("Game is not available yet.");
+
+        publishEndpointMock.Verify(
+            x => x.Publish(It.IsAny<OrderPlacedEvent>(), It.IsAny<CancellationToken>()),
+            Times.Never);
     }
 
     [Fact]

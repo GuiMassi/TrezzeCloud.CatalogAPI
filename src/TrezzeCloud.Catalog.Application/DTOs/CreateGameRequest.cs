@@ -5,5 +5,6 @@ public sealed record CreateGameRequest(
     string Description,
     decimal Price,
     string Category,
-    string ImageUrl
+    string ImageUrl,
+    DateTime DisponibilizationDate
 );

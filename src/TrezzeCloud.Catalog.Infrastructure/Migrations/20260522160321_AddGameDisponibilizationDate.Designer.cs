@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrezzeCloud.Catalog.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrezzeCloud.Catalog.Infrastructure.Data;
 namespace TrezzeCloud.Catalog.Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260522160321_AddGameDisponibilizationDate")]
+    partial class AddGameDisponibilizationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

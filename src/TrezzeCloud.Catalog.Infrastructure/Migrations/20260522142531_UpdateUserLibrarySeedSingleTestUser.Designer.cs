@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrezzeCloud.Catalog.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrezzeCloud.Catalog.Infrastructure.Data;
 namespace TrezzeCloud.Catalog.Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260522142531_UpdateUserLibrarySeedSingleTestUser")]
+    partial class UpdateUserLibrarySeedSingleTestUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +43,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
-
-                    b.Property<DateTime>("DisponibilizationDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -72,7 +72,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "RPG",
                             CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "RPG de aventura em ilhas flutuantes com foco em exploração.",
-                            DisponibilizationDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/skyward-legends.jpg",
                             IsActive = true,
                             Price = 129.90m,
@@ -84,7 +83,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Racing",
                             CreatedAt = new DateTime(2026, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Corridas urbanas de alta velocidade com trilha eletrônica intensa.",
-                            DisponibilizationDate = new DateTime(2026, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/neon-sprint.jpg",
                             IsActive = true,
                             Price = 89.90m,
@@ -96,7 +94,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Strategy",
                             CreatedAt = new DateTime(2026, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Estratégia tática por turnos com batalhas em larga escala.",
-                            DisponibilizationDate = new DateTime(2026, 1, 3, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/iron-tactics.jpg",
                             IsActive = true,
                             Price = 99.50m,
@@ -108,7 +105,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Simulation",
                             CreatedAt = new DateTime(2026, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Simulação de fazenda mágica com crafting e missões cooperativas.",
-                            DisponibilizationDate = new DateTime(2026, 1, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/mystic-valley.jpg",
                             IsActive = true,
                             Price = 74.00m,
@@ -120,7 +116,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Adventure",
                             CreatedAt = new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Thriller sci-fi com investigação em uma estação submersa.",
-                            DisponibilizationDate = new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/deep-signal.jpg",
                             IsActive = true,
                             Price = 109.00m,
@@ -132,7 +127,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Sandbox",
                             CreatedAt = new DateTime(2026, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Sandbox criativo de construção modular em mundos procedurais.",
-                            DisponibilizationDate = new DateTime(2026, 1, 6, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/block-forge.jpg",
                             IsActive = true,
                             Price = 59.90m,
@@ -144,7 +138,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "MOBA",
                             CreatedAt = new DateTime(2026, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "MOBA competitivo com heróis de classes assimétricas.",
-                            DisponibilizationDate = new DateTime(2026, 1, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/shadow-arena.jpg",
                             IsActive = true,
                             Price = 0.00m,
@@ -156,7 +149,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Shooter",
                             CreatedAt = new DateTime(2026, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "FPS tático com foco em objetivos e comunicação em equipe.",
-                            DisponibilizationDate = new DateTime(2026, 1, 8, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/crimson-protocol.jpg",
                             IsActive = true,
                             Price = 119.99m,
@@ -168,7 +160,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Action",
                             CreatedAt = new DateTime(2026, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Metroidvania sombrio com progressão por habilidades.",
-                            DisponibilizationDate = new DateTime(2026, 1, 9, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/echoes-of-ruin.jpg",
                             IsActive = true,
                             Price = 94.49m,
@@ -180,7 +171,6 @@ namespace TrezzeCloud.Catalog.Infrastructure.Migrations
                             Category = "Management",
                             CreatedAt = new DateTime(2026, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Gerenciamento de colônia espacial com economia dinâmica.",
-                            DisponibilizationDate = new DateTime(2026, 1, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "https://cdn.trezzecloud.local/catalog/games/orbit-colony.jpg",
                             IsActive = true,
                             Price = 139.00m,

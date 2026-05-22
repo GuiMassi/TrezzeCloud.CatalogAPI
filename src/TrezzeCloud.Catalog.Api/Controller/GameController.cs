@@ -29,7 +29,9 @@ public sealed class GameController : ControllerBase
                 x.Description,
                 x.Price,
                 x.Category,
-                x.ImageUrl))
+                x.ImageUrl,
+                x.DisponibilizationDate,
+                x.IsAvailable()))
             .ToListAsync();
 
         return Ok(games);
@@ -50,7 +52,9 @@ public sealed class GameController : ControllerBase
             game.Description,
             game.Price,
             game.Category,
-            game.ImageUrl));
+            game.ImageUrl,
+            game.DisponibilizationDate,
+            game.IsAvailable()));
     }
 
     [Authorize(Roles = "Admin")]
@@ -62,7 +66,8 @@ public sealed class GameController : ControllerBase
             request.Description,
             request.Price,
             request.Category,
-            request.ImageUrl);
+            request.ImageUrl,
+            request.DisponibilizationDate);
 
         await _context.Games.AddAsync(game);
 
@@ -77,7 +82,9 @@ public sealed class GameController : ControllerBase
                 game.Description,
                 game.Price,
                 game.Category,
-                game.ImageUrl));
+                game.ImageUrl,
+                game.DisponibilizationDate,
+                game.IsAvailable()));
     }
 
     [Authorize(Roles = "Admin")]
@@ -97,7 +104,8 @@ public sealed class GameController : ControllerBase
             request.Description,
             request.Price,
             request.Category,
-            request.ImageUrl);
+            request.ImageUrl,
+            request.DisponibilizationDate);
 
         await _context.SaveChangesAsync();
 

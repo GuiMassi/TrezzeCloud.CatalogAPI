@@ -14,6 +14,8 @@ public sealed class Game
 
     public string ImageUrl { get; private set; } = string.Empty;
 
+    public DateTime DisponibilizationDate { get; private set; }
+
     public bool IsActive { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
@@ -27,7 +29,8 @@ public sealed class Game
         string description,
         decimal price,
         string category,
-        string imageUrl)
+        string imageUrl,
+        DateTime disponibilizationDate)
     {
         Id = Guid.NewGuid();
 
@@ -36,6 +39,7 @@ public sealed class Game
         Price = price;
         Category = category;
         ImageUrl = imageUrl;
+        DisponibilizationDate = disponibilizationDate;
 
         IsActive = true;
 
@@ -47,13 +51,20 @@ public sealed class Game
         string description,
         decimal price,
         string category,
-        string imageUrl)
+        string imageUrl,
+        DateTime disponibilizationDate)
     {
         Title = title;
         Description = description;
         Price = price;
         Category = category;
         ImageUrl = imageUrl;
+        DisponibilizationDate = disponibilizationDate;
+    }
+
+    public bool IsAvailable()
+    {
+        return IsActive && DisponibilizationDate <= DateTime.UtcNow;
     }
 
     public void Disable()

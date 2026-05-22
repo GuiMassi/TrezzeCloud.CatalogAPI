@@ -1,6 +1,3 @@
-# README - CatalogAPI
-
-```md
 # TrezzeCloud.CatalogAPI
 
 Microsserviço responsável pelo gerenciamento de jogos e fluxo de compra.
@@ -15,7 +12,7 @@ Microsserviço responsável pelo gerenciamento de jogos e fluxo de compra.
 
 ---
 
-# Tecnologias
+## Tecnologias
 
 - .NET 10
 - ASP.NET Core
@@ -29,7 +26,7 @@ Microsserviço responsável pelo gerenciamento de jogos e fluxo de compra.
 
 ---
 
-# Variáveis de Ambiente
+## Variáveis de Ambiente
 
 | Variável | Descrição |
 |---|---|
@@ -43,17 +40,36 @@ Microsserviço responsável pelo gerenciamento de jogos e fluxo de compra.
 
 ---
 
-# Executar Localmente
+## Seed de Biblioteca (UserLibrary)
+
+O CatalogAPI possui seed fixo da UserLibrary usando um único usuário de teste com 5 jogos.
+
+### Usuário Teste Compartilhado (UsersAPI)
+
+- Id: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+- Name: Usuario Teste
+- Email: teste@trezzecloud.com
+
+Esse usuário deve existir no UsersAPI com o mesmo Id para consistência entre microserviços.
+
+### Segurança
+
+- Os dados acima são para desenvolvimento/local.
+- Não utilizar credenciais padrão em produção.
+
+---
+
+## Executar Localmente
 
 ```bash
 dotnet restore
 dotnet ef database update
 dotnet run
-````
+```
 
 ---
 
-# Docker
+## Docker
 
 ```bash
 docker build -t trezzecloud-catalog-api .
@@ -61,14 +77,12 @@ docker build -t trezzecloud-catalog-api .
 
 ---
 
-# Kubernetes
+## Kubernetes
 
 Manifestos disponíveis em:
 
 ```txt
 k8s/catalog-api
 ```
-
-````
 
 ---

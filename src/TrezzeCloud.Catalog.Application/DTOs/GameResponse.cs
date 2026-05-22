@@ -6,5 +6,7 @@ public sealed record GameResponse(
     string Description,
     decimal Price,
     string Category,
-    string ImageUrl
+    string ImageUrl,
+    DateTime DisponibilizationDate,
+    bool IsAvailable
 );

@@ -7,7 +7,6 @@
     <Project Path="src/TrezzeCloud.Contracts/TrezzeCloud.Contracts.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/TrezzeCloud.Catalog.Tests/TrezzeCloud.Catalog.Tests.csproj" />
     <Project Path="tests/TrezzeCloud.Catalog.UnitTests/TrezzeCloud.Catalog.UnitTests.csproj" />
   </Folder>
 </Solution>

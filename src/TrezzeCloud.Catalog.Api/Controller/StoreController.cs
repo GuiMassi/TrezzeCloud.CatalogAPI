@@ -41,6 +41,9 @@ public sealed class StoreController : ControllerBase
         if (game is null)
             return NotFound();
 
+        if (!game.IsAvailable())
+            return BadRequest("Game is not available yet.");
+
         var alreadyOwned = await _context.UserLibraries
             .AnyAsync(x =>
                 x.UserId == userId &&
